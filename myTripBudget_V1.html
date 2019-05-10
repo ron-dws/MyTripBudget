@@ -15,14 +15,22 @@
    }
    #h1main{
      font-size: 22px;
-     color:rgba(25, 25, 179, 0.78);
+     color:rgba(241, 247, 4, 0.78);
      text-align:center;
      padding-bottom:15px;
    }
    #screen1{
-    background-color: #74aaa3;
+    background-color: rgba(52, 72, 69, 0.95);
     padding: 30px;
     border-radius: 20px;
+    color: white;
+   }
+   #screen2{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    width:300px;
+    display:inline-block;
     color: white;
    }
   
@@ -72,7 +80,7 @@
         </div>
 	  </div>
   </div>
-  <div id="our_products" class="container-fluid">
+  <div class="container-fluid">
 		<div class="row">
       <div class="col-xm-2 col-sm-1 col-md-1 col-lg-4"></div>
 		  <div class="col-xm-8 col-sm-10 col-md-10 col-lg-4" style="padding-top: 10px; text-align:center; color:rgb(87, 87, 229);">
@@ -82,11 +90,10 @@
 		</div>
   </div>
   <!-------------Content--------------->
-  <div class="row container">
-    <div class="col-xm-2 col-sm-1 col-md-1 col-lg-4"></div>
-    <div class="col-xm-8 col-sm-10 col-md-10 col-lg-4" id="screen1">
+  <div style="text-align:center;">
+    <div id="screen2">
         <h1 id="h1main">My TripBudget SVers1</h1>
-        <form action="ron.php" class="needs-validation" novalidate>
+        <form action=" " style="text-align:left"class="needs-validation" novalidate>
           <div class="form-group">
             <label for="uname">Username:</label>
             <input type="email" class="form-control" id="uname" placeholder="Enter Your email" name="uname" required>
@@ -99,17 +106,9 @@
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
           </div>
-          <div class="form-group form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-              <div class="valid-feedback">Valid.</div>
-              <div class="invalid-feedback">Check this checkbox to continue.</div>
-            </label>
-          </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    <div class="col-xm-2 col-sm-1 col-md-1 col-lg-4"></div>
   </div>
 </body>
 </html>
