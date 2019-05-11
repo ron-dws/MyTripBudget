@@ -20,15 +20,6 @@
      padding-bottom:15px;
    }
   
-   #screen1{
-    background-color: rgba(52, 72, 69, 0.95);
-    padding: 30px;
-    border-radius: 20px;
-    width:300px;
-    display:inline-block;
-    color: white;
-   }
-
    #screen2{
     background-color: rgba(92, 34, 58, 0.95);
     padding: 30px;
@@ -49,25 +40,6 @@
 
   <!--JavaScript 1-->
   <script>
-    //handle screen1 submition
-    function get_screen1(){
-      var screen2Initial = document.getElementById("screen2");
-      var screen1Initial = document.getElementById("screen1");
-      
-
-        // Get the forms we want to add validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === true) {
-              screen1Initial.style.display = "none";
-              screen2Initial.style.display = "inline-block";
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-    }
     //handle screen2 submition
     function get_screen2(){
 
@@ -80,9 +52,7 @@
 (function() {
       'use strict';
       window.addEventListener('load', function() {
-        //Hide Screen2 when page load
-        var screen2Initial = document.getElementById("screen2");
-            screen2Initial.style.display = "none";
+        
         // Get the forms we want to add validation styles to
         var forms = document.getElementsByClassName('needs-validation');
         // Loop over them and prevent submission
@@ -103,7 +73,7 @@
   <div class="container-fluid">
 	  <div class="row header_main">
       <div class="col-sm-4">
-        <img  src="img/traveller_icon3.png" width="150" height="150" style="float:left; padding-top:10px;padding-bottom: 10px;" alt="myTripBudget logo"  >
+        <img  src="mg/traveller_icon3.png" width="150" height="150" style="float:left; padding-top:10px;padding-bottom: 10px;" alt="myTripBudget logo"  >
       </div>
       <div class="col-sm-8">
         <h1 style="color:rgba(255, 255, 254, 0.78); padding-top:30px;">MyTripBudget VS1</h1>
@@ -126,30 +96,6 @@
   </div>
   <!-------------Content--------------->
   <div style="text-align:center;">
-    <div id="screen1">
-        <h1 id="h1main">My TripBudget SVers1</h1>
-        <form action="page_screen2.html" onsubmit="get_screen1()" style="text-align:left" class="needs-validation" novalidate>
-          <div class="form-group">
-                <label for="trip_days">Days of the trip:</label>
-                <input type="number" min="1" class="form-control" id="trip_days" placeholder="How many days?" name="trip_days" required>
-                <div class="valid-feedback">Valid.</div>
-                <div class="invalid-feedback">Days must be equal or upper than 1</div>
-          </div>
-          <div class="form-group">
-            <label for="room_budget">Room Budget:</label>
-            <input type="number" min="0" class="form-control" id="room_budget" placeholder="Room budget?" name="room_budget" required>
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Amount must be equal or upper than 0.</div>
-          </div>
-          <!-- <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-            <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
-          </div> -->
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
     <div id="screen2" >
         <h1 id="h1main">My TripBudget SVers1</h1>
         <form action=" " onsubmit="get_screen2()" style="text-align:left" class="needs-validation" novalidate>
@@ -159,7 +105,6 @@
                 <div class="valid-feedback">Valid.</div>
                 <div class="invalid-feedback">Enter a valid email</div>
           </div>
-          
           <div class="form-group">
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
