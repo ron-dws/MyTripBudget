@@ -1,0 +1,37 @@
+=>All these screens are div, and run on the same page (It was supposed to, but I had issues
+   while trying to do it that way. Each will have its own page for now. Will fix the issue later)
+
+=>cookies will be used to save values persistently
+1)-screen 1
+     Display
+       *Number_of_day txtbox
+       *budget_room txtbox + submit btn
+       *if user not login -> screen 2
+       *if user login -> screen 3
+2)-screen 2
+     Display
+       *email txtbox + pass txtbox + Submit
+       *create an account link
+       *if good credential -> screen 3
+       *if wrong credential -> screen 5
+3)-screen 3
+     Display
+       *room_spent txtbox + submit -> screen 6
+4)-screen 5
+     Display -> similar to screen 2 + error
+       *Mess: "Please Enter a good credential"
+       *email txtbox + pass txtbox + Submit 
+       *create an account link
+       *if good credential ->  screen 3
+       *if wrong credential -> back screen 5
+5)-screen 6
+     Display Report
+       *willing_to_spend_for_the_day  label
+       *You_spent label
+       *color(if result_room >= 0 (green smiling face + mess)
+                             > 0 (red shy face + mess))
+       *Chart (pie: initial color: orange) => based on # of days the trip will last, and what was spent for the particular field (in this case room)
+                       if result_room >= 0 color of the day is green --------- result_room 'value' displays in green
+                       if result_room < 0  color of the day is red   --------- result_room 'value' displays in red
+                       
+       *clear_cookies btn
