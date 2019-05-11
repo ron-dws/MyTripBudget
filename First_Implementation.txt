@@ -1,6 +1,6 @@
 =>All these screens are div, and run on the same page (It was supposed to, but I had issues
    while trying to do it that way. Each will have its own page for now. Will fix the issue later)
-
+=>All Javascript
 =>cookies will be used to save values persistently
 1)-screen 1
      Display
