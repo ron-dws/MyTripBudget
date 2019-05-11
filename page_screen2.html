@@ -13,6 +13,17 @@
    .header_main{
      background-color: rgba(7, 21, 19, 0.95);
    }
+   
+   img#trip_logo{
+    float:left; 
+    padding-top:10px;
+    padding-bottom: 10px; 
+
+    /*The following two attributes are used to flip the logo picture*/
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+   }
+   
    #h1main{
      font-size: 22px;
      color:rgba(241, 247, 4, 0.78);
@@ -73,7 +84,7 @@
   <div class="container-fluid">
 	  <div class="row header_main">
       <div class="col-sm-4">
-        <img  src="mg/traveller_icon3.png" width="150" height="150" style="float:left; padding-top:10px;padding-bottom: 10px;" alt="myTripBudget logo"  >
+        <img  src="img/traveller_icon3.png" id="trip_logo" width="150" height="150" alt="myTripBudget logo"  >
       </div>
       <div class="col-sm-8">
         <h1 style="color:rgba(255, 255, 254, 0.78); padding-top:30px;">MyTripBudget VS1</h1>
