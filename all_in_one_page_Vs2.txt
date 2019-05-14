@@ -1,4 +1,4 @@
-------------------------------------------Manage spent_room entries (all_in_one_Vs2)------------
+------------------------------------------Manage spent_room entries (all_in_one_page_Vs2)------------
   *check how many days was entered for the trip trip (Number_of_days)
   *multiply 'number of days(trip)' by 'room budget set' room_total_budget = ( Number_of_days * budget_room)
       ->to obtain total room budget for the entire trip
