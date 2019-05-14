@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MyTripBudgetFront</title>
+  <!-- <base href="/"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="img/traveller_icon3.png">
+
+  <!--Style css-->
+  <style>
+   .header_main{
+     background-color: rgba(30, 96, 87, 0.95);
+     border-radius: 100px 0px 50px 100px;
+   }
+
+   .footer_main{
+    clear: both;
+    text-align:center;
+    height: 30px;
+    color:white;
+    background-color: rgba(30, 96, 87, 0.95);
+   }
+   
+   img#trip_logo{
+    float:left; 
+    padding-top:10px;
+    padding-bottom: 10px; 
+
+    /*The following two attributes are used to flip the logo picture*/
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+   }
+   
+   #h1main{
+     font-size: 22px;
+     color:rgba(241, 247, 4, 0.78);
+     text-align:center;
+     padding-bottom:15px;
+   }
+
+   #h2report_header{
+     font-size: 18px;
+     text-align:left;
+   }
+   
+   #screen1{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+
+   #screen2{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+  
+   #screen3{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+   
+   #screen4{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+
+   #screen5{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+
+   #screen6{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+   
+   input[type="text"],[type="number"]{
+	  border-radius:50px;
+	  padding:15px;
+	  border:2px solid dodgerblue;
+	  margin-bottom:10px;
+	  text-align:center;
+	  font-size:18px;
+   }
+   
+   input[type="submit"]{
+   border-radius:25px;
+	 padding:5px;
+	 font-size:22px;
+	 color:white;
+	 background-color: dodgerblue;
+   }
+   
+   input:focus{
+      outline:none;
+   }
+
+   /*chart*/
+    a.canvasjs-chart-credit{
+        display:none;
+    }
+    .canvasjs-chart-toolbar{
+    
+        display:none;
+    }
+  
+    #chartContainer{
+      height: 210px; 
+      width: 250px;
+    }
+  </style>
+
+  <!--Font awesome cdn-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!--Bootstrap 4 cdn-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+      //When the page load
+      function onloading_page(){
+        //get each screen div
+        var screen1Initial = document.getElementById("screen1");
+        var screen2Initial = document.getElementById("screen2");
+        var screen3Initial = document.getElementById("screen3");
+        var screen4Initial = document.getElementById("screen4");
+        var screen5Initial = document.getElementById("screen5");
+        var screen6Initial = document.getElementById("screen6");
+
+        //only screen 1 will display on load
+        screen2Initial.style.display = "none";
+        screen3Initial.style.display = "none";
+        screen4Initial.style.display = "none";
+        screen5Initial.style.display = "none";
+        screen6Initial.style.display = "none";
+
+      }
+
+      //function to display screen3
+      function screen3_display(){
+        var screen1Initial = document.getElementById("screen1");
+        var screen2Initial = document.getElementById("screen2");
+        var screen3Initial = document.getElementById("screen3");
+        var screen4Initial = document.getElementById("screen4");
+        var screen5Initial = document.getElementById("screen5");
+        var screen6Initial = document.getElementById("screen6");
+
+        screen1Initial.style.display = "none";
+        screen2Initial.style.display = "none";
+        screen3Initial.style.display = "inline-block";
+        screen4Initial.style.display = "none";
+        screen5Initial.style.display = "none";
+        screen6Initial.style.display = "none";
+
+      }
+
+      //process input from screen1 -> Submit btn from screen1 clicked
+      function screen1_processed(){
+        //display screen3
+            screen3_display();
+        //create cookies to hold trip_days & room_budget
+        var get_trip_days = document.getElementById("trip_days").value;
+        var get_room_budget = document.getElementById("room_budget").value;
+        document.cookie = "set_trip_days="+get_trip_days;
+        document.cookie = "set_room_budget="+get_room_budget;
+
+        }
+
+      //function to display screen6 (report)
+      function screen6_display(){
+        var screen1Initial = document.getElementById("screen1");
+        var screen2Initial = document.getElementById("screen2");
+        var screen3Initial = document.getElementById("screen3");
+        var screen4Initial = document.getElementById("screen4");
+        var screen5Initial = document.getElementById("screen5");
+        var screen6Initial = document.getElementById("screen6");
+
+        screen1Initial.style.display = "none";
+        screen2Initial.style.display = "none";
+        screen3Initial.style.display = "none";
+        screen4Initial.style.display = "none";
+        screen5Initial.style.display = "none";
+        screen6Initial.style.display = "inline-block";
+      }
+      //process input from screen3 -> Submit btn from screen3 clicked
+      function screen3_processed(){
+        
+        //display screen6 (report)
+          screen6_display();
+
+        //create cookie to hold amount spent for the room (room_spent) from screen 3
+        var get_room_spent = document.getElementById("room_spent").value;
+        document.cookie = "set_room_spent="+get_room_spent;
+ 
+        //display all cookies on screen6 (report) -> p element id=show_report
+        var display_report = document.getElementById("show_report");
+        var get_all_cookies = document.cookie;
+
+        //get cookies value
+        var s_tr_days = getCookie("set_trip_days");
+        var s_rm_bdg  = getCookie("set_room_budget");
+        var s_rm_spt  = getCookie("set_room_spent");
+
+        var result = s_rm_bdg - s_rm_spt;
+
+        display_report.innerHTML = "<div style='text-align:left; color: dodgerblue; padding-top:30px;'>trip days: " 
+                                  + s_tr_days + "<br> room budget: $" + s_rm_bdg 
+                                  +"<br> spent for room: $" + s_rm_spt +"<br> Result: $" 
+                                  + result +"</div>"; //get_all_cookies (to show all cookies); 
+
+        //display thumbs based result
+        var display_thumbs = document.getElementById("show_thumbs");
+        function displaythumbs(get_result){
+          if(get_result >= 0){
+            display_thumbs.innerHTML ="<div style='text-align:left'><img src='img/thumbs_up.png' alt='thumbs up' width='50px' height='50px'>"
+                                      +" GOOD Management!! <br> You saved <b style='color:green; font-size:18px;'> $"+ get_result+"</b></div>";
+          }
+          else{
+            display_thumbs.innerHTML ="<div style='text-align:left'><img src='img/thumbs_down.png' alt='thumbs up' width='50px' height='50px'>"
+                                       +" <br> You spent <b style='color:red; font-size:18px;'>$"+ get_result +"</b> more</div>";
+          }
+        }
+
+        displaythumbs(result); // call function to display thumbs
+
+        //display chart
+           var showchart = document.getElementById("chart_display");
+                           showchart.style.display = "inline"; 
+             
+					var chart = new CanvasJS.Chart("chartContainer", {
+						exportEnabled: true,
+						animationEnabled: true,
+						title:{
+							text: "Room Spending Management"
+						},
+						legend:{
+							cursor: "pointer",
+							itemclick: explodePie
+						},
+						data: [{
+							type: "pie",
+							showInLegend: true,
+							toolTipContent: "{name}: <strong>${y}</strong>",
+							indexLabel: "{name} : ${y}",
+							dataPoints: [
+								{ y: s_rm_spt, name: "Amount spent (room)", exploded: true },
+								{ y: s_rm_bdg, name: "Room budget set" },	
+							]
+						}]
+					});
+					chart.render();
+      }
+
+      function explodePie (e) {
+                if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                  e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+                } else {
+                  e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+                }
+                e.chart.render();  
+            }
+
+        //Cookies processing work
+
+        /* function setCookie(cname,cvalue,exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+          }
+        */
+          function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+          }        
+  </script>
+  <!--Library to manage the chart-->
+  <!-- <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
+  <script src="js/canvasjs_library.js"></script>
+
+ </head>
+ <body onload="onloading_page()">
+  <!--Header-->
+  <div class="container-fluid">
+	  <div class="row header_main">
+         <div class="col-sm-4"> <img  src="img/traveller_icon3.png" id="trip_logo" class="img-responsive" height="150px" alt="myTripBudget logo"  > </div>
+         <div class="col-sm-8"> <h1 style="color:rgba(255, 255, 254, 0.78); padding-top:30px;">MyTripBudget VS1</h1> </div>
+         
+	  </div>
+	  <div class="row" class="container"> 
+        <div class="col-sm-12"> <hr style="width:80%;"> </div>
+	  </div>
+  </div>
+  <!-------------Content--------------->
+  <div style="text-align:center;">
+  <!--screen1-->
+    <div id="screen1">
+        <h1 id="h1main">My TripBudget SVers1</h1>
+        
+            <label for="trip_days">Days of the trip:</label>
+            <input type="number" min="1" class="form-control" id="trip_days" placeholder="How many days?" name="trip_days" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Days must be equal or upper than 1</div>
+          
+            <label for="room_budget">Room Budget:</label>
+            <input type="number" min="0" class="form-control" id="room_budget" placeholder="Room budget?" name="room_budget" required>
+            <div class="valid-feedback">Valid.</div>
+            <div class="invalid-feedback">Amount must be equal or upper than 0.</div>
+         
+          <button type="submit" class="btn btn-primary" onclick="screen1_processed()">Submit</button>
+        
+    </div>
+  
+  <!--screen2-->
+    <div id="screen2" >
+        <h1 id="h1main">My TripBudget SVers1</h1>
+			<label for="log_email">Enter your email:</label>
+			<input type="email" class="form-control" id="log_email" placeholder="Your email" name="log_email" required>
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required><br>
+            <button type="submit" class="btn btn-primary" onclick="screen2_processed()">Submit</button>   
+    </div>
+  <!--screen3-->
+    <div id="screen3" >
+      <h1 id="h1main">My TripBudget SVers1</h1>
+             <input id="room_spent" type="number" min="1" placeholder="Amount spent on Room" required >
+			 <button type="submit" class="btn btn-primary" onclick="screen3_processed()" >Submit</button>
+    </div>
+  <!--screen4-->
+    <div id="screen4" >
+    
+    </div>
+  <!--screen5-->
+    <div id="screen5">
+      
+    </div>
+  <!--screen6-->
+    <div id="screen6" >
+        <h1 id="h1main">My TripBudget SVers1</h1>
+        <h2 id="h2report_header">Trip Spending Report</h2>
+        <p id="show_report"></p>
+        <p id="show_thumbs"></p>
+        <div id="chart_display">
+            <div id="chartContainer"></div>
+        </div>
+    </div>
+
+  </div><!--Closing container with all screens-->
+
+  <!--Footer-->
+  <div class="container-fluid">
+      <div class="row" class="container"> 
+          <div class="col-sm-12"> <hr style="width:80%;"> </div>
+      </div>
+      <div class="row footer_main">
+           <div class="col-sm-12"> &copy ron_wanko_mine </div>
+      </div>
+    </div>
+
+</body>
+</html>
