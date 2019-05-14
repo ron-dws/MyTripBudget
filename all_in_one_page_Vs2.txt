@@ -1,0 +1,33 @@
+------------------------------------------Manage spent_room entries (all_in_one_Vs2)------------
+  *check how many days was entered for the trip trip (Number_of_days)
+  *multiply 'number of days(trip)' by 'room budget set' room_total_budget = ( Number_of_days * budget_room)
+      ->to obtain total room budget for the entire trip
+  *create a loop to let user enter spending for each day
+      var i = 0;
+      var room_spent_details[];
+      var room_total_spent = 0;
+       for(i, i < Number_of_days, i ++)
+        {
+           //display screen to get amount spent for the room for the day
+               function_to_display_screen_3 (input the get room spent)
+           //load array that will hold room_spent for each day
+               room_spent_details [i] = room_spent.push;
+           //get room total spent
+               room_total_spent = room_total_spent + room_spent;   
+        }
+
+   *Display room spending for each day
+      var r = 0;
+      for (r, r < room_spent_details.lenght, r++)
+        {
+             var real_day = r + 1;
+           //display spending
+             document.getElementById("rm_det_display_p_elmnt").innerHTML = "On day <b style='color:orange'>"+ real_day +" </b> You spent <b style='color:green;'>$"+room_spent_details[r]+"</b> for your room <br>";
+        }
+   *Display report
+      trip_days
+      budget_room
+      room_total_spent
+      result = room_total_budget - room_total_spent
+      thumbs + good or bad management message
+      chart (based on room_total_budget & room_total_spent)
