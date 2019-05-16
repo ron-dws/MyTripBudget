@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MyTripBudgetFront</title>
+  <!-- <base href="/"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="img/traveller_icon3.png">
+
+  <!--Style css-->
+  <style>
+   .header_main{
+     background-color: rgba(30, 96, 87, 0.95);
+     border-radius: 100px 0px 50px 100px;
+   }
+
+   .footer_main{
+    clear: both;
+    text-align:center;
+    height: 30px;
+    color:white;
+    background-color: rgba(30, 96, 87, 0.95);
+   }
+   
+   img#trip_logo{
+    float:left; 
+    padding-top:10px;
+    padding-bottom: 10px; 
+
+    /*The following two attributes are used to flip the logo picture*/
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+   }
+   
+   #h1main{
+     font-size: 22px;
+     color:rgba(241, 247, 4, 0.78);
+     text-align:center;
+     padding-bottom:15px;
+   }
+
+   #h2report_header{
+     font-size: 18px;
+     text-align:left;
+   }
+   
+   #screen1{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+
+   #screen2{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+  
+   #screen3{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+   
+   #screen4{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+
+   #screen5{
+    background-color: rgba(52, 72, 69, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+
+   #screen6{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    width:300px;
+    display:inline-block;
+    color: white;
+   }
+   
+   input[type="text"],[type="number"]{
+	  border-radius:50px;
+	  padding:15px;
+	  border:2px solid dodgerblue;
+	  margin-bottom:10px;
+	  text-align:center;
+	  font-size:18px;
+   }
+   
+   input[type="submit"]{
+   border-radius:25px;
+	 padding:5px;
+	 font-size:22px;
+	 color:white;
+	 background-color: dodgerblue;
+   }
+   
+   input:focus{
+      outline:none;
+   }
+
+   /*chart*/
+    a.canvasjs-chart-credit{
+        display:none;
+    }
+    .canvasjs-chart-toolbar{
+    
+        display:none;
+    }
+  
+    #chartContainer{
+      height: 210px; 
+      width: 250px;
+    }
+  </style>
+
+  <!--Font awesome cdn-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!--Bootstrap 4 cdn-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+      function room_det(){
+          var det_show_submit = document.getElementById("det_show_submit");
+          var days = document.getElementById("trip_days").value;
+          var ipt  = [];
+
+          console.log(days);
+          dis_inp_to_get_room(days);
+
+          var det_show_go = "<button type='submit' class='btn btn-primary' onclick='get_rm_values("+days+")'>Validate</button>";
+          det_show_submit.innerHTML = det_show_go;
+
+      }
+
+      function dis_inp_to_get_room(getdays){
+          var realday;
+          var inpid;
+          var det_show_var = document.getElementById("det_show");
+              det_show_var.innerHTML = "";
+          
+          for(var i=0; i< getdays; i++){
+               realday = i + 1;
+               inpid = "inp"+realday;
+               det_show_var.innerHTML += "days "+realday+": <input type='text' id="+inpid+">"+
+                                         "<button type='submit' onclick='get_rm_single_value"+
+                                         "("+inpid+")' style='border-radius:100px;'>val</button><br>";
+          }
+
+      }
+
+      function get_rm_single_value(iid){
+           var getval = document.getElementById(iid);
+           console.log(iid);
+           console.log(getval);
+      }
+
+      function get_rm_values(d){
+          var r = document.getElementById("inpid").value;
+          console.log(d);
+          for(var z=0; z<d; z++){
+                console.log(r);
+          }
+          //document.getElementById(inpid);
+      }
+
+  </script>
+  
+ </head>
+ <body>
+  <!--Header-->
+  <div class="container-fluid">
+	  <div class="row header_main">
+         <div class="col-sm-4"> <img  src="img/traveller_icon3.png" id="trip_logo" class="img-responsive" height="150px" alt="myTripBudget logo"  > </div>
+         <div class="col-sm-8"> <h1 style="color:rgba(255, 255, 254, 0.78); padding-top:30px;">MyTripBudget VS1</h1> </div>
+         
+	  </div>
+	  <div class="row" class="container"> 
+        <div class="col-sm-12"> <hr style="width:80%;"> </div>
+	  </div>
+  </div>
+  <!-------------Content--------------->
+  <div style="text-align:center;">
+  <!--screen1-->
+    <div id="screen1">
+        <h1 id="h1main">My TripBudget SVers1</h1>
+            <input type="number" min="1" class="form-control" id="trip_days" placeholder="How many days?" name="trip_days" required>
+           
+            <input type="number" min="0" class="form-control" id="room_budget" placeholder="Room budget?" name="room_budget" required>
+          
+    <button type="submit" class="btn btn-primary" onclick="room_det()">Submit</button>   <!--onclick="screen1_processed()"-->  
+
+     <p id="det_show"></p>
+     <div id="det_show_submit"></div>
+    </div>
+  
+  <!--Footer-->
+  <div class="container-fluid">
+      <div class="row" class="container"> 
+          <div class="col-sm-12"> <hr style="width:80%;"> </div>
+      </div>
+      <div class="row footer_main">
+           <div class="col-sm-12"> &copy ron_wanko_mine </div>
+      </div>
+    </div>
+
+</body>
+</html>
