@@ -74,6 +74,16 @@
     display:inline-block;
     color: white;
    }
+
+   #screen3_plus{
+    background-color: rgba(92, 34, 58, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    min-height: 400px;
+    
+    display:inline-block;
+    color: white;
+   }
    
    #screen4{
     background-color: rgba(52, 72, 69, 0.95);
@@ -158,6 +168,7 @@
         var screen4Initial = document.getElementById("screen4");
         var screen5Initial = document.getElementById("screen5");
         var screen6Initial = document.getElementById("screen6");
+        var screen3_plusInit = document.getElementById("screen3_plus");
 
         //only screen 1 will display on load
         screen2Initial.style.display = "none";
@@ -165,6 +176,7 @@
         screen4Initial.style.display = "none";
         screen5Initial.style.display = "none";
         screen6Initial.style.display = "none";
+        screen3_plusInit.style.display = "none"
 
       }
 
@@ -176,6 +188,7 @@
         var screen4Initial = document.getElementById("screen4");
         var screen5Initial = document.getElementById("screen5");
         var screen6Initial = document.getElementById("screen6");
+        var screen3_plusInit = document.getElementById("screen3_plus");
 
         screen1Initial.style.display = "none";
         screen2Initial.style.display = "none";
@@ -183,21 +196,77 @@
         screen4Initial.style.display = "none";
         screen5Initial.style.display = "none";
         screen6Initial.style.display = "none";
+        screen3_plusInit.style.display = "none"
 
       }
 
       //process input from screen1 -> Submit btn from screen1 clicked
       function screen1_processed(){
-        //display screen3
-            screen3_display();
-        //create cookies to hold trip_days & room_budget
-        var get_trip_days = document.getElementById("trip_days").value;
-        var get_room_budget = document.getElementById("room_budget").value;
-        document.cookie = "set_trip_days="+get_trip_days;
-        document.cookie = "set_room_budget="+get_room_budget;
+            //create cookies to hold trip_days & room_budget
+            var get_trip_days = document.getElementById("trip_days").value;
+            var get_room_budget = document.getElementById("room_budget").value;
+            document.cookie = "set_trip_days="+get_trip_days;
+            document.cookie = "set_room_budget="+get_room_budget;
+
+            //for screen3_plus
+            screen3_plus_display_input(get_trip_days);
+            if(get_trip_days > 1){
+              //display inputs to enter room values for different days
+              screen3_plus_display();
+            }else{
+              //display screen3
+              screen3_display();
+            }
 
         }
 
+         //Trip will go over than a day
+      function screen3_plus_display(){
+
+        var screen1Initial = document.getElementById("screen1");
+        var screen2Initial = document.getElementById("screen2");
+        var screen3Initial = document.getElementById("screen3");
+        var screen4Initial = document.getElementById("screen4");
+        var screen5Initial = document.getElementById("screen5");
+        var screen6Initial = document.getElementById("screen6");
+        var screen3_plusInit = document.getElementById("screen3_plus");
+
+        screen1Initial.style.display = "none";
+        screen2Initial.style.display = "none";
+        screen3Initial.style.display = "none";
+        screen4Initial.style.display = "none";
+        screen5Initial.style.display = "none";
+        screen6Initial.style.display = "none";
+        screen3_plusInit.style.display = "inline-block"
+      }
+
+      function screen3_plus_display_input(getdays){
+          var realday;
+          var inpid;
+          var det_show_var = document.getElementById("det_show");
+              det_show_var.innerHTML = "";
+          
+          for(var i=0; i< getdays; i++){
+               realday = i + 1;
+               inpid = "inp"+realday;
+               det_show_var.innerHTML += "days "+realday+": <input type='text' id="+inpid+">"+
+                                         "<button type='submit' onclick='get_rm_single_value"+
+                                         "("+inpid+")' style='border-radius:100px;'>val</button><br>";
+
+              //May be the solution is
+              //->create an input element
+              //->add id attribute the input element
+              //->add text attribute to the input element
+              //->add the input element to the the Document (so it can be manipulated -> I hope so)
+          }
+
+      }
+       //handle validate for each input for room spent
+       function get_rm_single_value(iid){
+           var getval = document.getElementById(iid).value;
+           console.log(iid);
+           console.log(getval);
+      }
       //function to display screen6 (report)
       function screen6_display(){
         var screen1Initial = document.getElementById("screen1");
@@ -206,6 +275,7 @@
         var screen4Initial = document.getElementById("screen4");
         var screen5Initial = document.getElementById("screen5");
         var screen6Initial = document.getElementById("screen6");
+        var screen3_plusInit = document.getElementById("screen3_plus");
 
         screen1Initial.style.display = "none";
         screen2Initial.style.display = "none";
@@ -213,6 +283,7 @@
         screen4Initial.style.display = "none";
         screen5Initial.style.display = "none";
         screen6Initial.style.display = "inline-block";
+        screen3_plusInit.style.display = "none"
       }
       //process input from screen3 -> Submit btn from screen3 clicked
       function screen3_processed(){
@@ -369,6 +440,13 @@
              <input id="room_spent" type="number" min="1" placeholder="Amount spent on Room" required >
 			 <button type="submit" class="btn btn-primary" onclick="screen3_processed()" >Submit</button>
     </div>
+  <!--screen3_plus / trip more than a day -->
+  <div id="screen3_plus" >
+    <h1 id="h1main">My TripBudget SVers1</h1>
+           <p id="det_show"></p>
+     <button type="submit" class="btn btn-primary" onclick="screen3_processed()" >Submit</button>
+  </div>
+
   <!--screen4-->
     <div id="screen4" >
     
