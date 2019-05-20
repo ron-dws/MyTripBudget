@@ -167,7 +167,16 @@
           var inpid;
           var det_show_var = document.getElementById("det_show");
               det_show_var.innerHTML = "";
-          
+
+          //Create an input
+          var input = document.createElement("input"); 
+              input.type="text";
+              input.id=inpid; 
+              input.innerHTML = "testcat" ;
+              $('somediv').appendChild(input); 
+
+          //Create 
+          //Display the input
           for(var i=0; i< getdays; i++){
                realday = i + 1;
                inpid = "inp"+realday;

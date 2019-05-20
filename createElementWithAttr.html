@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      #btngenerate2
+      {
+          background-color: dodgerblue;
+          border: 1px solid dodgerblue;
+          margin-left: 10px;
+          margin-top: 8px;
+          border-radius: 100px;
+      }
+
+      #btnew{
+          background-color: dodgerblue;
+          border: none;
+          color: white;
+      }
+    
+    </style>
+
+    <script>
+        function loadme(){
+            
+            
+        }
+
+        function display_val(val)
+        {
+            //var data = '"'+val+'"';
+            console.log(val.id);
+            var get_inp_value = document.getElementById(val.id).value;
+            var dis_val = document.getElementById("val_dis_p");
+
+            dis_val.innerHTML = get_inp_value;
+            
+            //create cookie
+            document.cookie = val.id + "=" + get_inp_value;
+            console.log(document.cookie);
+
+        }
+
+        function report(){
+            var use_to_show = document.getElementById("report_dis");
+                use_to_show.innerHTML = "";
+
+            var total_spent_dis = document.getElementById("total_sp_dis");
+                
+            //get value of the trip_days cookie
+            var trip_days_ck = getCookie("trip_days");
+            //variable to add all the spending
+            var total_spent = 0;
+            console.log("trip days="+trip_days_ck);
+            //read cookies based on # days
+            for(var i=0; i < trip_days_ck; i++){
+                var real = i + 1;
+                var read_value = getCookie("room"+real);
+                //var total_spent;
+                total_spent = total_spent + Number(read_value);
+                use_to_show.innerHTML += "<p>day "+" "+real+": "+"$"+read_value+"</p><br>";
+                                          
+
+            }
+
+            total_spent_dis.innerHTML = "<p><b>Total Spent: </b>"+total_spent+"</p><br>";
+        }
+
+        function tryme(){
+            var get_days = document.getElementById("inp2").value;
+
+            var get_div = document.getElementById("screenTest");
+                get_div.innerHTML = "";
+
+            for (var i = 0; i < get_days; i++){
+                var id_sp = i+1
+                var the_id = "room"+id_sp;
+
+                //create cookie to hold the # of days for the trip
+                document.cookie = "trip_days="+get_days;
+                //create input
+                var new_input = document.createElement("input");
+                new_input.type = "text";
+                new_input.setAttribute("id",the_id);
+                //create button
+                var btn = document.createElement("button");
+                btn.id = "btnew"
+                btn.type = "submit";
+                
+                //create button to wrap first button, so the onclick event can work 
+                var btn5 = document.createElement('button');
+                    btn5.innerHTML = '<button id="btnew" onclick="display_val('+the_id+')">Send</button>';
+                    btn5.id = "btngenerate2"; //to style the btn5
+
+                //create a break for a better visibility
+                var breakit = document.createElement("br");
+                
+                //append new inputs + buttons + breaks into the screenTest div
+                //var get_div = document.getElementById("screenTest");
+                get_div.appendChild(new_input);
+                get_div.appendChild(btn5);
+                get_div.appendChild(breakit);
+
+            }  
+        }
+        
+        //Read a cookie
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+          }        
+    </script>
+     
+</head>
+<body style="text-align:center;" onload="loadme()">
+    <input type="text" id="inp2"><br>
+    <div id="screenTest">
+    </div>
+    <div id="val_dis_p">    
+    </div><br>
+    <button type="submit" id="btn3" onclick="tryme()">click</button><br><br>
+    
+    <button type ="submit" id="other" onclick="report()">Report</button><br>
+
+    <div id="report_dis"></div>
+    <div id="total_sp_dis"></div> 
+
+</body>
+</html>
