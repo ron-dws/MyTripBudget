@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,11 +30,11 @@
             
         }
 
-        function display_val(val)
+        function display_val(lineid, val)
         {
             //var data = '"'+val+'"';
             console.log(val);
-            console.log(val.id);
+            //console.log(val.id);
             var get_inp_value = document.getElementById(val.id).value;
             var dis_val = document.getElementById("val_dis_p");
 
@@ -41,7 +42,9 @@
             
             //create cookie
             document.cookie = val.id + "=" + get_inp_value;
-            //console.log(document.cookie);
+            console.log(document.cookie);
+
+            lineid.style.display = "none";
 
         }
 
@@ -72,19 +75,21 @@
 
         function tryme(){
             var get_days = document.getElementById("inp2").value;
-
+            var div_line_id;
             var get_div = document.getElementById("screenTest");
                 get_div.innerHTML = "";
 
             for (var i = 0; i < get_days; i++){
                 var id_sp = i+1
                 var the_id = "room"+id_sp;
+                div_line_id = "line"+id_sp;
 
                 //create cookie to hold the # of days for the trip
                 document.cookie = "trip_days="+get_days;
 
                 //Create parent div that will hold each input line (label + input + btns + break)
                 var div_line = document.createElement("div");
+                div_line.setAttribute("id",div_line_id);
 
                 //create label
                 var new_input_label = document.createElement("label");
@@ -101,7 +106,7 @@
                 
                 //create button to wrap first button, so the onclick event can work 
                 var btn5 = document.createElement('button');
-                    btn5.innerHTML = '<button id="btnew" onclick="display_val('+the_id+')">Send</button>';
+                    btn5.innerHTML = '<button id="btnew" onclick="display_val('+div_line_id+','+the_id+')">Send</button>';
                     btn5.id = "btngenerate2"; //to style the btn5
 
                 //create a break for a better visibility
@@ -109,10 +114,12 @@
                 
                 //append new inputs + buttons + breaks into the screenTest div
                 //var get_div = document.getElementById("screenTest");
-                get_div.appendChild(new_input_label);
-                get_div.appendChild(new_input);
-                get_div.appendChild(btn5);
-                get_div.appendChild(breakit);
+                div_line.appendChild(new_input_label);
+                div_line.appendChild(new_input);
+                div_line.appendChild(btn5);
+                div_line.appendChild(breakit);
+
+                get_div.append(div_line);
 
             }  
         }
@@ -151,3 +158,5 @@
 
 </body>
 </html>
+
+<!--------------------------------------------------Copier-->
