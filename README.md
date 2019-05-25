@@ -35,3 +35,8 @@
                > the day preceding the last day of the trip => App will display a report of the expenses for each field
                                   for specific field (e.g room)->  will make a comparison between amount_spent & total_amount_budgetized
                                                                    will make a comparison of total_spent and total_budgetized
+
+ 3)-In the future 
+     ->Give option to the user to link images with his trip (bills, picture of a location, ....) 
+	 ->Give option to the user tot login with one of his/her social network credential
+	 
