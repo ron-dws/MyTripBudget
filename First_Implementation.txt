@@ -7,16 +7,22 @@
        *Number_of_day txtbox
        *budget_room txtbox + submit btn
        *if user not login -> screen 2
-       *if user login -> screen 3
+       *if user login & Number_of_day = 1 -> screen 3
+       *if user login & Number_of_day > 1 -> screen 3+
 2)-screen 2
      Display
        *email txtbox + pass txtbox + Submit
        *create an account link
        *if good credential -> screen 3
        *if wrong credential -> screen 5
-3)-screen 3
-     Display
-       *room_spent txtbox + submit -> screen 6
+3-1)-screen 3
+       Display
+         *room_spent txtbox + submit -> screen 6
+3-2)-screen 3+
+       Display
+         *room_spent multi txtbox + val btn + submit
+         *val btn to validate each input
+         *submit -> screen 6+ (report for multi days trip)
 4)-screen 5
      Display -> similar to screen 2 + error
        *Mess: "Please Enter a good credential"
@@ -24,7 +30,7 @@
        *create an account link
        *if good credential ->  screen 3
        *if wrong credential -> back screen 5
-5)-screen 6
+5-1)-screen 6
      Display Report
        *willing_to_spend_for_the_day  label
        *You_spent label
@@ -35,3 +41,54 @@
                        if result_room < 0  color of the day is red   --------- result_room 'value' displays in red
                        
        *clear_cookies btn
+
+5-2)-screen 6+
+     Display Report for multi days trip
+       *room spending for each day
+          +dif_set_budget_and_you_spent
+       *color(if result_room >= 0 green)
+                             > 0  red)
+       *total_spent
+       *set_budget_total = set_budget * Number_of_days
+       
+       *color(if result_room_total >= 0 (green smiling face + mess)
+                             > 0 (red shy face + mess))
+       *Chart (pie: initial color: orange) => based on # of days the trip will last, and what was spent for the particular field (in this case room)
+                       if result_room_total >= 0 color of the day is green --------- result_room 'value' displays in green
+                       if result_room_total < 0  color of the day is red   --------- result_room 'value' displays in red
+
+---------------------------------------------------------------------------
+  *cookies will be used to store user_info (username, ip_address)
+       ->This will help to reconize the user when he browse again to the app
+
+  Class
+    *User       =>Fields -email -username -password
+                  -Manage user login
+    *Trips      =>Fields -Trip_name -Trip_days -Country -State -City -Start_date -Return_date -Tickets(cost) -Trip_note
+    *Budget     =>Fields -Room -Food -Xport -Souvenirs -Activities -Extra -Budget_note
+    *Spending   =>Fields -Room_spending -Food_spending -Xport_spending -Activities_spending (will go with act_spending_note) -Extra_spending -Spending_note
+  
+   
+Databases
+   *User (user_id, username, password, date_create, last_update_date)
+   *Trips (trip_id, trip_name, trip_days, trip_country, trip_state, trip_city, trip_start_date, trip_end_date, trip_created_date, trip_updated_date)
+   *
+
+Global Report Displays
+  *trip_name, trip_days, trip_city, trip_start_date, trip_end_date
+  *budget_room_set, total_budget_room_set, total_budget_room_spent (same for the others budget set fields except the budget_note)
+  *total_spending_room (same for the other spending fields)
+  
+ ->The report can be exported on an excel file for more manipulation by the user
+
+ ->Filter Once user is login
+     can filter by report by *trip_name *trip_city *trip_country
+                             *trip_I_saved_money *trip_I_loose_money
+                             *trip_days_I_saved_money *trip_days_I_lost_money
+                             *trip_name and room, trip_name & food, trip_name & xport, trip_name and activities, trip_name & extra
+                             *total_trip_total_spent (will display the total of all the spendings for all the trips)
+         user will also be able to enter a starting date and ending date and he/she will
+                    get the report of all the spending for all the trip for that period
+
+
+      
